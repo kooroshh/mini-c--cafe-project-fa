@@ -16,7 +16,7 @@ namespace Cafe.DataLayer
     {
         public int ProductID { get; set; }
         public string ProductName { get; set; }
-        public decimal ProductPrice { get; set; }
+        public int ProductPrice { get; set; }
         public bool Is_Active { get; set; }
     }
 }

@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="Cafe_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="Cafe_DBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Products" EntityType="Cafe_DBModel.Product" />
+  </EntityContainer>
   <EntityType Name="Product">
     <Key>
       <PropertyRef Name="ProductID" />
     </Key>
     <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="ProductName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ProductPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="ProductName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="ProductPrice" Type="Int32" Nullable="false" />
     <Property Name="Is_Active" Type="Boolean" Nullable="false" />
   </EntityType>
-  <EntityContainer Name="Cafe_DBEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="Products" EntityType="Self.Product" />
-  </EntityContainer>
 </Schema>

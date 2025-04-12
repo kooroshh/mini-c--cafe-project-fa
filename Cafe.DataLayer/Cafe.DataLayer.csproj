@@ -65,10 +65,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CafeDB.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Context\UnitOfWork.cs" />
     <Compile Include="Product.cs">
       <DependentUpon>CafeDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IGenericRepository.cs" />
+    <Compile Include="Services\GenericRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="CafeDB.edmx">
@@ -98,5 +101,6 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

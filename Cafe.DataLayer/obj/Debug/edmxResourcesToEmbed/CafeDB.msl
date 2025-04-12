@@ -4,10 +4,10 @@
     <EntitySetMapping Name="Products">
       <EntityTypeMapping TypeName="Cafe_DBModel.Product">
         <MappingFragment StoreEntitySet="Products">
-          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
-          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
-          <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
           <ScalarProperty Name="Is_Active" ColumnName="Is_Active" />
+          <ScalarProperty Name="ProductPrice" ColumnName="ProductPrice" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

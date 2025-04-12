@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\Cafe.DataLayer\bin\Debug\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\Cafe.DataLayer\bin\Debug\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +58,12 @@
     <Compile Include="Main.Designer.cs">
       <DependentUpon>Main.cs</DependentUpon>
     </Compile>
+    <Compile Include="Products\AddOrEditProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Products\AddOrEditProduct.Designer.cs">
+      <DependentUpon>AddOrEditProduct.cs</DependentUpon>
+    </Compile>
     <Compile Include="Products\Products.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +74,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Products\AddOrEditProduct.resx">
+      <DependentUpon>AddOrEditProduct.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Products\Products.resx">
       <DependentUpon>Products.cs</DependentUpon>
@@ -148,6 +163,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\1371476120_fingerprint_reader.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cafe.DataLayer\Cafe.DataLayer.csproj">
+      <Project>{eb3a1818-482a-461a-8896-c0645d87eccb}</Project>
+      <Name>Cafe.DataLayer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cafe.Utilities\Cafe.Utilities.csproj">
+      <Project>{572b45fd-0d7d-4e65-83ad-4e613d87e685}</Project>
+      <Name>Cafe.Utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
