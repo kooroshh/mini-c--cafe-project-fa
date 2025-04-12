@@ -1,0 +1,6 @@
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.Utilities\bin\Debug\Cafe.Utilities.dll
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.Utilities\bin\Debug\Cafe.Utilities.pdb
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.Utilities\obj\Debug\Cafe.Utilities.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.Utilities\obj\Debug\Cafe.Utilities.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.Utilities\obj\Debug\Cafe.Utilities.dll
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.Utilities\obj\Debug\Cafe.Utilities.pdb

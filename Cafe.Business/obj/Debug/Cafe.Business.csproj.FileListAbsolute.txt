@@ -1,0 +1,6 @@
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.Business\bin\Debug\Cafe.Business.dll
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.Business\bin\Debug\Cafe.Business.pdb
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.Business\obj\Debug\Cafe.Business.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.Business\obj\Debug\Cafe.Business.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.Business\obj\Debug\Cafe.Business.dll
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.Business\obj\Debug\Cafe.Business.pdb

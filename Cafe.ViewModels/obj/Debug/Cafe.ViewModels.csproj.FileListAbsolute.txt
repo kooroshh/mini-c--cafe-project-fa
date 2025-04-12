@@ -1,0 +1,6 @@
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.ViewModels\bin\Debug\Cafe.ViewModels.dll
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.ViewModels\bin\Debug\Cafe.ViewModels.pdb
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.ViewModels\obj\Debug\Cafe.ViewModels.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.ViewModels\obj\Debug\Cafe.ViewModels.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.ViewModels\obj\Debug\Cafe.ViewModels.dll
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.ViewModels\obj\Debug\Cafe.ViewModels.pdb

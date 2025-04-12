@@ -1,0 +1,12 @@
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.DataLayer\bin\Debug\Cafe.DataLayer.dll.config
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.DataLayer\bin\Debug\Cafe.DataLayer.dll
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.DataLayer\bin\Debug\Cafe.DataLayer.pdb
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.DataLayer\bin\Debug\EntityFramework.dll
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.DataLayer\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.DataLayer\bin\Debug\EntityFramework.xml
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.DataLayer\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.DataLayer\obj\Debug\Cafe.DataLayer.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.DataLayer\obj\Debug\Cafe.DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.DataLayer\obj\Debug\Cafe.Dat.DEAE945E.Up2Date
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.DataLayer\obj\Debug\Cafe.DataLayer.dll
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe.DataLayer\obj\Debug\Cafe.DataLayer.pdb

@@ -8,3 +8,4 @@ C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe
 C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.App.csproj.CoreCompileInputs.cache
 C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.exe
 C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.pdb
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.Products.Products.resources
