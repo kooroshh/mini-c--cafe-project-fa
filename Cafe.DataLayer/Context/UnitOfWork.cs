@@ -12,6 +12,7 @@ namespace Cafe.DataLayer.Context
     {
         private Cafe_DBEntities _db;
         private GenericRepository<Product> _productsRepository;
+        private GenericRepository<Customer> _customerRepository;
 
         public GenericRepository<Product> ProductRepository { 
             get 
@@ -21,6 +22,18 @@ namespace Cafe.DataLayer.Context
                     this._productsRepository = new GenericRepository<Product>(this._db);
                 }
                 return this._productsRepository;
+            }
+        }
+
+        public GenericRepository<Customer> CustomerRepository
+        {
+            get
+            {
+                if (this._customerRepository == null)
+                {
+                    this._customerRepository = new GenericRepository<Customer>(this._db);
+                }
+                return this._customerRepository;
             }
         }
 

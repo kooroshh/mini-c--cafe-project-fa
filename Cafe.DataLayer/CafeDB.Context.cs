@@ -26,5 +26,6 @@ namespace Cafe.DataLayer
         }
     
         public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Customer> Customers { get; set; }
     }
 }

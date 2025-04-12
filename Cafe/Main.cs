@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Cafe.Products;
 
 namespace Cafe
 {
@@ -21,6 +22,12 @@ namespace Cafe
         {
             Products.Products products = new Products.Products();
             products.ShowDialog();
+        }
+
+        private void btnCustomer_Click(object sender, EventArgs e)
+        {
+            Customers customers = new Customers();
+            customers.ShowDialog();
         }
     }
 }

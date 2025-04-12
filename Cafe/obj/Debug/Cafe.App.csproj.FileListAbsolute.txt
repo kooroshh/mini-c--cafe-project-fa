@@ -20,3 +20,5 @@ C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe
 C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\bin\Debug\Cafe.Utilities.dll
 C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\bin\Debug\Cafe.Utilities.pdb
 C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.Products.AddOrEditProduct.resources
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.Products.Customers.resources
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.Products.AddOrEditCustomer.resources

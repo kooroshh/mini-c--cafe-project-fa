@@ -2,6 +2,7 @@
 <Schema Namespace="Cafe_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="Cafe_DBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Products" EntityType="Cafe_DBModel.Product" />
+    <EntitySet Name="Customers" EntityType="Cafe_DBModel.Customer" />
   </EntityContainer>
   <EntityType Name="Product">
     <Key>
@@ -11,5 +12,15 @@
     <Property Name="ProductName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
     <Property Name="ProductPrice" Type="Int32" Nullable="false" />
     <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerMobile" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerEmail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

@@ -66,6 +66,9 @@
       <DependentUpon>CafeDB.edmx</DependentUpon>
     </Compile>
     <Compile Include="Context\UnitOfWork.cs" />
+    <Compile Include="Customer.cs">
+      <DependentUpon>CafeDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>CafeDB.tt</DependentUpon>
     </Compile>
