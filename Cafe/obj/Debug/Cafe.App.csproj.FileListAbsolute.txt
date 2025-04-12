@@ -1,0 +1,10 @@
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\bin\Debug\Cafe.exe.config
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\bin\Debug\Cafe.exe
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\bin\Debug\Cafe.pdb
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.App.csproj.AssemblyReference.cache
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.Main.resources
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.Properties.Resources.resources
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.App.csproj.GenerateResource.cache
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.App.csproj.CoreCompileInputs.cache
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.exe
+C:\Users\Lenovo\Desktop\koori\3_C#\session8 CofeProject\Cafe\Cafe\obj\Debug\Cafe.pdb
