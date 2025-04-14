@@ -11,8 +11,8 @@ namespace Cafe.DataLayer.Services
 {
     public class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : class
     {
-        private Cafe_DBEntities _db;
-        private DbSet<TEntity> _dbSet;
+        protected Cafe_DBEntities _db;
+        protected DbSet<TEntity> _dbSet;
 
         public GenericRepository(Cafe_DBEntities db)
         {
@@ -62,6 +62,7 @@ namespace Cafe.DataLayer.Services
         {
             return this._dbSet.Find(key);
         }
+
 
         public void Update(TEntity entity)
         {

@@ -73,7 +73,9 @@
       <DependentUpon>CafeDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ICustomerRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
+    <Compile Include="Services\CustomerRepository.cs" />
     <Compile Include="Services\GenericRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -104,6 +106,11 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Cafe.ViewModels\Cafe.ViewModels.csproj">
+      <Project>{33ebdfe8-e7d5-4734-943a-3ffafee8239b}</Project>
+      <Name>Cafe.ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

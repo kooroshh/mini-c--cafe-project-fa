@@ -84,6 +84,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\AddProduct.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\AddProduct.Designer.cs">
+      <DependentUpon>AddProduct.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\frmEditCount.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools\frmEditCount.Designer.cs">
+      <DependentUpon>frmEditCount.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Customers\AddOrEditCustomer.resx">
       <DependentUpon>AddOrEditCustomer.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,6 +121,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Tools\AddProduct.resx">
+      <DependentUpon>AddProduct.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\frmEditCount.resx">
+      <DependentUpon>frmEditCount.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -190,6 +208,10 @@
     <ProjectReference Include="..\Cafe.Utilities\Cafe.Utilities.csproj">
       <Project>{572b45fd-0d7d-4e65-83ad-4e613d87e685}</Project>
       <Name>Cafe.Utilities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cafe.ViewModels\Cafe.ViewModels.csproj">
+      <Project>{33ebdfe8-e7d5-4734-943a-3ffafee8239b}</Project>
+      <Name>Cafe.ViewModels</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
