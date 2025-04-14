@@ -15,6 +15,26 @@
           <Property Name="CustomerEmail" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Address" Type="nvarchar" MaxLength="800" />
         </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="800" />
+          <Property Name="OrderDate" Type="datetime" Nullable="false" />
+          <Property Name="TotalAmount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders_Products">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="Count" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="ProductID" />
@@ -24,9 +44,59 @@
           <Property Name="ProductPrice" Type="int" Nullable="false" />
           <Property Name="Is_Active" Type="bit" Nullable="false" />
         </EntityType>
+        <Association Name="FK_OP_OrderID">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Orders_Products" Type="Self.Orders_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Orders_Products">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OP_ProductID">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="Orders_Products" Type="Self.Orders_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Orders_Products">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_CustomerID">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="Cafe_DBModelStoreContainer">
           <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders_Products" EntityType="Self.Orders_Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_OP_OrderID" Association="Self.FK_OP_OrderID">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Orders_Products" EntitySet="Orders_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OP_ProductID" Association="Self.FK_OP_ProductID">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Orders_Products" EntitySet="Orders_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_CustomerID" Association="Self.FK_Orders_CustomerID">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -35,6 +105,20 @@
         <EntityContainer Name="Cafe_DBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Products" EntityType="Cafe_DBModel.Product" />
           <EntitySet Name="Customers" EntityType="Cafe_DBModel.Customer" />
+          <EntitySet Name="Orders" EntityType="Cafe_DBModel.Order" />
+          <EntitySet Name="Orders_Products" EntityType="Cafe_DBModel.Orders_Products" />
+          <AssociationSet Name="FK_Orders_CustomerID" Association="Cafe_DBModel.FK_Orders_CustomerID">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OP_OrderID" Association="Cafe_DBModel.FK_OP_OrderID">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Orders_Products" EntitySet="Orders_Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OP_ProductID" Association="Cafe_DBModel.FK_OP_ProductID">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Orders_Products" EntitySet="Orders_Products" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Product">
           <Key>
@@ -44,6 +128,7 @@
           <Property Name="ProductName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ProductPrice" Type="Int32" Nullable="false" />
           <Property Name="Is_Active" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Orders_Products" Relationship="Cafe_DBModel.FK_OP_ProductID" FromRole="Product" ToRole="Orders_Products" />
         </EntityType>
         <EntityType Name="Customer">
           <Key>
@@ -54,7 +139,68 @@
           <Property Name="CustomerMobile" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="CustomerEmail" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Address" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Cafe_DBModel.FK_Orders_CustomerID" FromRole="Customer" ToRole="Order" />
         </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerID" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="800" FixedLength="false" Unicode="true" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TotalAmount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Cafe_DBModel.FK_Orders_CustomerID" FromRole="Order" ToRole="Customer" />
+          <NavigationProperty Name="Orders_Products" Relationship="Cafe_DBModel.FK_OP_OrderID" FromRole="Order" ToRole="Orders_Products" />
+        </EntityType>
+        <EntityType Name="Orders_Products">
+          <Key>
+            <PropertyRef Name="OrderID" />
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Cafe_DBModel.FK_OP_OrderID" FromRole="Orders_Products" ToRole="Order" />
+          <NavigationProperty Name="Product" Relationship="Cafe_DBModel.FK_OP_ProductID" FromRole="Orders_Products" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Orders_CustomerID">
+          <End Type="Cafe_DBModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="Cafe_DBModel.Order" Role="Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OP_OrderID">
+          <End Type="Cafe_DBModel.Order" Role="Order" Multiplicity="1" />
+          <End Type="Cafe_DBModel.Orders_Products" Role="Orders_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="Orders_Products">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OP_ProductID">
+          <End Type="Cafe_DBModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="Cafe_DBModel.Orders_Products" Role="Orders_Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="Orders_Products">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -82,7 +228,28 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="Cafe_DBModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders_Products">
+            <EntityTypeMapping TypeName="Cafe_DBModel.Orders_Products">
+              <MappingFragment StoreEntitySet="Orders_Products">
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

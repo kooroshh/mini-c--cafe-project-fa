@@ -5,9 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="31996deee81b4b49be4077695494510f" Name="Diagram1">
-        <EntityTypeShape EntityType="Cafe_DBModel.Product" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="Cafe_DBModel.Product" Width="1.5" PointX="0.875" PointY="1.375" />
         <EntityTypeShape EntityType="Cafe_DBModel.Customer" Width="1.5" PointX="3.375" PointY="0.75" />
-      </Diagram>
+        <EntityTypeShape EntityType="Cafe_DBModel.Order" Width="1.5" PointX="5.625" PointY="5.125" />
+        <EntityTypeShape EntityType="Cafe_DBModel.Orders_Products" Width="1.5" PointX="7.875" PointY="3.5" />
+        <AssociationConnector Association="Cafe_DBModel.FK_Orders_CustomerID" />
+        <AssociationConnector Association="Cafe_DBModel.FK_OP_OrderID" />
+        <AssociationConnector Association="Cafe_DBModel.FK_OP_ProductID" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

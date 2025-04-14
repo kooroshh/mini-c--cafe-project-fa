@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Cafe.DataLayer;
 using Cafe.DataLayer.Context;
 using Cafe.Products;
 using Cafe.Tools;
@@ -149,15 +150,132 @@ namespace Cafe
         {
             int totalPrice = int.Parse(this.dgvProducts.CurrentRow.Cells["ProductPrice"].Value.ToString()) * int.Parse(this.dgvProducts.CurrentRow.Cells["Count"].Value.ToString());
             this.dgvProducts.CurrentRow.Cells[4].Value = totalPrice;
+            this.SetInfo();
+        }
+
+        private void SetInfo()
+        {
             this.lblTotalProducts.Text = this.dgvProducts.Rows.Count.ToString();
-            totalPrice = 0;
-            foreach(DataGridViewRow item in this.dgvProducts.Rows)
+            int totalPrice = 0;
+            foreach (DataGridViewRow item in this.dgvProducts.Rows)
             {
                 totalPrice += int.Parse(item.Cells["TotalPrice"].Value.ToString());
             }
             this.lblTotalPrice.Text = totalPrice.ToString();
-
-
         }
+
+        private void btnSubmitOrder_Click(object sender, EventArgs e)
+        {
+            if (ValidateInputs())
+            {
+                using (UnitOfWork db = new UnitOfWork())
+                {
+                    Order newOrder = new Order()
+                    {
+                        CustomerID = int.Parse(this.dgvCustomers.CurrentRow.Cells[0].Value.ToString()),
+                        OrderDate = DateTime.Now,
+                        Address = this.txtAddress.Text,
+                        TotalAmount = int.Parse(lblTotalPrice.Text),
+                        OrderCode = this.GetOrderCode(int.Parse(this.dgvCustomers.CurrentRow.Cells[0].Value.ToString())),
+                    };
+                    db.OrderRepository.Create(newOrder);
+                    db.Save();
+                    int orderID = newOrder.OrderID;
+                    foreach(DataGridViewRow product in dgvProducts.Rows)
+                    {
+                        Orders_Products orderProduct = new Orders_Products() 
+                        {
+                            Count = int.Parse(product.Cells["Count"].Value.ToString()),
+                            OrderID = orderID,
+                            ProductID = int.Parse(product.Cells[0].Value.ToString()),
+                        };
+                        db.OrdersProductsRepository.Create(orderProduct);
+                    }
+                    db.Save();
+                }
+                MessageBox.Show("با موفقیت ثبت شد", "توجه", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Reset();
+            }
+        }
+
+        private bool ValidateInputs()
+        {
+
+            if (this.txtCustomer.Text == "")
+            {
+                MessageBox.Show("طرف حساب انتخاب نشده است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (this.IsWrongProductCount())
+            {
+                MessageBox.Show("محصولی انتخاب نشده است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool IsWrongProductCount()
+        {
+            try
+            {
+                int test = int.Parse(this.lblTotalProducts.Text);
+                if (test <= 0)
+                    return true;
+                return false;
+            }
+            catch
+            {
+                return true;
+            }
+        }
+
+        private void Reset()
+        {
+            this.dgvProducts.Rows.Clear();
+            this.SetInfo();
+            if (dgvCustomers.Rows.Count > 0)
+            {
+                dgvCustomers.ClearSelection();
+                dgvCustomers.Rows[0].Selected = true;
+                dgvCustomers.CurrentCell = dgvCustomers.Rows[0].Cells[1];
+                if (dgvCustomers.CurrentRow.Cells[2].Value != null)
+                {
+                    this.txtAddress.Text = dgvCustomers.CurrentRow.Cells[2].Value.ToString();
+                }
+                else
+                {
+                    this.txtAddress.Text = "";
+                }
+            }
+        }
+
+        private string GetOrderCode(int CustomerId)
+        {
+            DateTime my = new DateTime(DateTime.Now.Ticks);
+            int year = my.Year;
+            int month = my.Month;
+            int day = my.Day;
+            int hour = my.Hour;
+            int minute = my.Minute;
+            int second = my.Second;
+            int milisecond = my.Millisecond;
+            int sum = year + month + day + hour + minute + second + milisecond;
+            int productCode = int.Parse(lblTotalProducts.Text) + this.GetProductCode();
+            string orderCode = $"{CustomerId}{productCode}{sum}";
+            return orderCode;
+        }
+
+        private int GetProductCode()
+        {
+            int codes = 0;
+            foreach (DataGridViewRow item in dgvProducts.Rows)
+            {
+                codes += int.Parse(item.Cells[0].Value.ToString());
+            }
+            return codes;
+        }
+
     }
 }

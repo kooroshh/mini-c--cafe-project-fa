@@ -347,7 +347,6 @@
             this.btnOrders.Size = new System.Drawing.Size(74, 64);
             this.btnOrders.Text = "سفارشات";
             this.btnOrders.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnOrders.Click += new System.EventHandler(this.btnCustomer_Click);
             // 
             // btnSubmitOrder
             // 
@@ -358,7 +357,7 @@
             this.btnSubmitOrder.Size = new System.Drawing.Size(89, 64);
             this.btnSubmitOrder.Text = "ثبت سفارش";
             this.btnSubmitOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSubmitOrder.Click += new System.EventHandler(this.btnCustomer_Click);
+            this.btnSubmitOrder.Click += new System.EventHandler(this.btnSubmitOrder_Click);
             // 
             // dataGridViewTextBoxColumn1
             // 

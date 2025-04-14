@@ -12,19 +12,22 @@ namespace Cafe.DataLayer
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public Order()
         {
             this.Orders_Products = new HashSet<Orders_Products>();
         }
     
-        public int ProductID { get; set; }
-        public string ProductName { get; set; }
-        public int ProductPrice { get; set; }
-        public bool Is_Active { get; set; }
+        public int OrderID { get; set; }
+        public string OrderCode { get; set; }
+        public int CustomerID { get; set; }
+        public string Address { get; set; }
+        public System.DateTime OrderDate { get; set; }
+        public int TotalAmount { get; set; }
     
+        public virtual Customer Customer { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Orders_Products> Orders_Products { get; set; }
     }

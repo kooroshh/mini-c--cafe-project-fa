@@ -32,6 +32,11 @@ namespace Cafe.Tools
             try
             {
                 int test = int.Parse(this.txtCount.Text);
+                if (test <= 0)
+                {
+                    MessageBox.Show("ورودی اشتباه است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
                 return true;
             }
             catch

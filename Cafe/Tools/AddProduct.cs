@@ -85,6 +85,10 @@ namespace Cafe.Tools
             try
             {
                 int test = int.Parse(txtCount.Text);
+                if (test <= 0)
+                {
+                    return true;
+                }
                 return false;
             }
             catch

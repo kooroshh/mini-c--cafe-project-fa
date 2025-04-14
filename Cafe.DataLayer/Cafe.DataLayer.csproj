@@ -69,6 +69,12 @@
     <Compile Include="Customer.cs">
       <DependentUpon>CafeDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="Order.cs">
+      <DependentUpon>CafeDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Orders_Products.cs">
+      <DependentUpon>CafeDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>CafeDB.tt</DependentUpon>
     </Compile>
