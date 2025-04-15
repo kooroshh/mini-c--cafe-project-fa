@@ -22,46 +22,52 @@ namespace Cafe.Products
             InitializeComponent();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (this.ValidateInputs())
-            {
-                DataLayer.Customer customer = new DataLayer.Customer()
-                {
-                    CustomerName = txtCName.Text,
-                    CustomerEmail = txtCEmail.Text,
-                    CustomerMobile = txtCMobile.Text,
-                    Address = txtCAddress.Text,
-                };
 
-                
-                if (this.CustomerId == 0)
+        private bool IsValidEmail(string email)
+        {
+            try
+            {
+                var test = new MailAddress(email);
+                using (UnitOfWork db = new UnitOfWork())
                 {
-                    using (UnitOfWork db = new UnitOfWork())
+                    bool exists = db.CustomerRepository.Get(c => c.CustomerEmail == email && c.CustomerID != this.CustomerId).Any();
+                    if (exists)
                     {
-                        db.CustomerRepository.Create(customer);
-                        db.Save();
+                        return true;
                     }
                 }
-                else
-                {
-                    using (UnitOfWork db = new UnitOfWork())
-                    {
-                        customer.CustomerID = this.CustomerId;
-                        db.CustomerRepository.Update(customer);
-                        db.Save();
-                    }
-                }
-                this.DialogResult = DialogResult.OK;
+                return false;
+            }
+            catch
+            {
+                return true;
             }
         }
 
+        private bool IsValidMobile(string mobile)
+        {
+            if (!Regex.IsMatch(mobile, @"^09\d{9}$"))
+            {
+                return false;
+            }
+
+            using (UnitOfWork db = new UnitOfWork())
+            {
+                bool exists = db.CustomerRepository.Get(c => c.CustomerMobile == mobile && c.CustomerID != this.CustomerId).Any();
+                if (exists)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
         private bool ValidateInputs()
         {
 
             if (this.txtCName.Text == "")
             {
-                MessageBox.Show("نام نمیتواند خالی باشد", "خطا",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("نام نمیتواند خالی باشد", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
             if (this.txtCMobile.Text == "")
@@ -97,6 +103,35 @@ namespace Cafe.Products
 
 
 
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (this.ValidateInputs())
+            {
+                DataLayer.Customer customer = new DataLayer.Customer()
+                {
+                    CustomerName = txtCName.Text,
+                    CustomerEmail = txtCEmail.Text,
+                    CustomerMobile = txtCMobile.Text,
+                    Address = txtCAddress.Text,
+                };
+
+                using (UnitOfWork db = new UnitOfWork())
+                {
+                    if (this.CustomerId == 0)
+                    {
+                        db.CustomerRepository.Create(customer);
+                    }
+                    else
+                    {
+                        customer.CustomerID = this.CustomerId;
+                        db.CustomerRepository.Update(customer);
+                    }
+                    db.Save();
+                }
+                this.DialogResult = DialogResult.OK;
+            }
+        }
+
         private void AddOrEditCustomer_Load(object sender, EventArgs e)
         {
             if (this.CustomerId != 0)
@@ -115,44 +150,5 @@ namespace Cafe.Products
             }
         }
 
-        private bool IsValidEmail(string email)
-        {
-            try
-            {
-                var test = new MailAddress(email);
-                using (UnitOfWork db = new UnitOfWork())
-                {
-                    bool exists = db.CustomerRepository.Get(c => c.CustomerEmail == email && c.CustomerID != this.CustomerId).Any();
-                    if (exists)
-                    {
-                        return true;
-                    }
-                }
-                    return false;
-            }
-            catch
-            {
-                return true;
-            }
-        }
-
-        private bool IsValidMobile(string mobile)
-        {
-            if (!Regex.IsMatch(mobile, @"^09\d{9}$"))
-            {
-                return false;
-            }
-
-            using (UnitOfWork db = new UnitOfWork())
-            {
-                bool exists = db.CustomerRepository.Get(c => c.CustomerMobile == mobile && c.CustomerID != this.CustomerId).Any();
-                if (exists)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
     }
 }

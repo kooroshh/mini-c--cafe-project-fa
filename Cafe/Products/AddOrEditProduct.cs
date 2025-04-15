@@ -19,6 +19,16 @@ namespace Cafe.Products
             InitializeComponent();
         }
 
+        private bool ValidateInputs()
+        {
+            if (this.txtPName.Text == "")
+            {
+                MessageBox.Show("نام نمیتواند خالی باشد", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+            return true;
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             if (this.ValidateInputs())
@@ -27,35 +37,22 @@ namespace Cafe.Products
                 product.ProductName = txtPName.Text;
                 product.ProductPrice = (int)txtPPrice.Value;
                 product.Is_Active = ckPStatusFalse.Checked ? false : true;
-                if (this.ProductId == 0)
+                using (UnitOfWork db = new UnitOfWork())
                 {
-                    using (UnitOfWork db = new UnitOfWork())
+                    if (this.ProductId == 0)
                     {
                         db.ProductRepository.Create(product);
-                        db.Save();
                     }
-                }
-                else
-                {
-                    using (UnitOfWork db = new UnitOfWork())
+                    else
                     {
                         product.ProductID = this.ProductId;
                         db.ProductRepository.Update(product);
-                        db.Save();
                     }
+                    db.Save();
                 }
+
                 this.DialogResult = DialogResult.OK;
             }
-        }
-
-        private bool ValidateInputs()
-        {
-            if (this.txtPName.Text == "")
-            {
-                MessageBox.Show("نام نمیتواند خالی باشد", "خطا",MessageBoxButtons.OK,MessageBoxIcon.Error);
-                return false;
-            }
-            return true;
         }
 
         private void AddOrEditProduct_Load(object sender, EventArgs e)

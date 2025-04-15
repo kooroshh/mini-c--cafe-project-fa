@@ -19,12 +19,6 @@ namespace Cafe.Products
             InitializeComponent();
         }
 
-        private void Products_Load(object sender, EventArgs e)
-        {
-            this.dgvProducts.AutoGenerateColumns = false;
-            BindGrid();
-        }
-
         public void BindGrid(string filter = "")
         {
             List<DataLayer.Product> products = new List<DataLayer.Product>();
@@ -51,6 +45,13 @@ namespace Cafe.Products
                 string isActive = (product.Is_Active) ? "موجود" : "نا موجود";
                 this.dgvProducts.Rows.Add(product.ProductID, product.ProductName, product.ProductPrice.ToToman(), isActive);
             }
+        }
+
+
+        private void Products_Load(object sender, EventArgs e)
+        {
+            this.dgvProducts.AutoGenerateColumns = false;
+            BindGrid();
         }
 
         private void btnRefreshProducts_Click(object sender, EventArgs e)

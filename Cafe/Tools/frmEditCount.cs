@@ -18,15 +18,6 @@ namespace Cafe.Tools
             InitializeComponent();
         }
 
-        private void btnSave_Click(object sender, EventArgs e)
-        {
-            if (this.ValidateInputs())
-            {
-                this.Count = int.Parse(txtCount.Text);
-                this.DialogResult = DialogResult.OK;
-            }
-        }
-
         private bool ValidateInputs()
         {
             try
@@ -43,6 +34,17 @@ namespace Cafe.Tools
             {
                 MessageBox.Show("ورودی اشتباه است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
+            }
+        }
+
+
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            if (this.ValidateInputs())
+            {
+                this.Count = int.Parse(txtCount.Text);
+                this.DialogResult = DialogResult.OK;
             }
         }
 

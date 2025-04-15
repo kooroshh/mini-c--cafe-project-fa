@@ -23,25 +23,115 @@ namespace Cafe
             InitializeComponent();
         }
 
-        private void btnFood_Click(object sender, EventArgs e)
+        private int GetProductCode()
         {
-            Products.Products products = new Products.Products();
-            products.ShowDialog();
+            int codes = 0;
+            foreach (DataGridViewRow item in dgvProducts.Rows)
+            {
+                codes += int.Parse(item.Cells[0].Value.ToString());
+            }
+            return codes;
         }
 
-        private void btnCustomer_Click(object sender, EventArgs e)
+        private string GetOrderCode(int CustomerId)
         {
-            Customers customers = new Customers();
-            customers.ShowDialog();
-            this.LoadCustomers();
+            DateTime my = DateTime.Now;
+            int sum = my.Year + my.Month + my.Day + my.Hour + my.Minute + my.Second + my.Millisecond;
+            int productCode = int.Parse(lblTotalProducts.Text) + this.GetProductCode();
+            string orderCode = $"{CustomerId}{productCode}{sum}";
+            return orderCode;
         }
 
-        private void Main_Load(object sender, EventArgs e)
+        private void SetInfo()
         {
-            dgvCustomers.AutoGenerateColumns = false;
-            dgvProducts.AutoGenerateColumns = false;
-            this.LoadCustomers();
-            this.SetInputsValues();
+            this.lblTotalProducts.Text = this.dgvProducts.Rows.Count.ToString();
+            int totalPrice = 0;
+            foreach (DataGridViewRow item in this.dgvProducts.Rows)
+            {
+                totalPrice += int.Parse(item.Cells["TotalPrice"].Value.ToString());
+            }
+            this.lblTotalPrice.Text = totalPrice.ToString();
+        }
+
+        private void Reset()
+        {
+            this.dgvProducts.Rows.Clear();
+            this.SetInfo();
+            if (dgvCustomers.Rows.Count > 0)
+            {
+                dgvCustomers.ClearSelection();
+                dgvCustomers.Rows[0].Selected = true;
+                dgvCustomers.CurrentCell = dgvCustomers.Rows[0].Cells[1];
+                if (dgvCustomers.CurrentRow.Cells[2].Value != null)
+                {
+                    this.txtAddress.Text = dgvCustomers.CurrentRow.Cells[2].Value.ToString();
+                }
+                else
+                {
+                    this.txtAddress.Text = "";
+                }
+            }
+        }
+
+        private bool IsWrongProductCount()
+        {
+            try
+            {
+                int test = int.Parse(this.lblTotalProducts.Text);
+                if (test <= 0)
+                    return true;
+                return false;
+            }
+            catch
+            {
+                return true;
+            }
+        }
+
+        private void SetCustomersInputsValues()
+        {
+            if (dgvCustomers.CurrentRow != null)
+            {
+                this.txtCustomer.Text = this.dgvCustomers.CurrentRow.Cells["CustomerName"].Value.ToString();
+                if (this.dgvCustomers.CurrentRow.Cells["Address"].Value != null)
+                {
+                    this.txtAddress.Text = this.dgvCustomers.CurrentRow.Cells["Address"].Value.ToString();
+                }
+                else
+                {
+                    this.txtAddress.Text = "";
+                }
+            }
+        }
+
+        private bool ValidateInputs()
+        {
+
+            if (this.txtCustomer.Text == "")
+            {
+                MessageBox.Show("طرف حساب انتخاب نشده است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            if (this.IsWrongProductCount())
+            {
+                MessageBox.Show("محصولی انتخاب نشده است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+
+            return true;
+        }
+
+        private void SetDatas() // Change total price for new count in edit or add
+        {
+            int totalPrice = int.Parse(this.dgvProducts.CurrentRow.Cells["ProductPrice"].Value.ToString()) * int.Parse(this.dgvProducts.CurrentRow.Cells["Count"].Value.ToString());
+            this.dgvProducts.CurrentRow.Cells[4].Value = totalPrice;
+            this.SetInfo();
+        }
+
+        private void ShowDialog(Form form)
+        {
+            form.ShowDialog();
         }
 
         private void LoadCustomers(string filter = "")
@@ -59,25 +149,31 @@ namespace Cafe
             }
         }
 
-        private void SetInputsValues()
+
+
+
+        private void btnFood_Click(object sender, EventArgs e)
         {
-            if (dgvCustomers.CurrentRow != null)
-            {
-                this.txtCustomer.Text = this.dgvCustomers.CurrentRow.Cells["CustomerName"].Value.ToString();
-                if (this.dgvCustomers.CurrentRow.Cells["Address"].Value != null)
-                {
-                    this.txtAddress.Text = this.dgvCustomers.CurrentRow.Cells["Address"].Value.ToString();
-                }
-                else
-                {
-                    this.txtAddress.Text = "";
-                }
-            }
+            this.ShowDialog(new Products.Products());
+        }
+
+        private void btnCustomer_Click(object sender, EventArgs e)
+        {
+            this.ShowDialog(new Customers());
+            this.LoadCustomers();
+        }
+
+        private void Main_Load(object sender, EventArgs e)
+        {
+            dgvCustomers.AutoGenerateColumns = false;
+            dgvProducts.AutoGenerateColumns = false;
+            this.LoadCustomers();
+            this.SetCustomersInputsValues();
         }
 
         private void dgvCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            this.SetInputsValues();
+            this.SetCustomersInputsValues();
         }
 
         private void txtSearchCustomer_TextChanged(object sender, EventArgs e)
@@ -118,7 +214,7 @@ namespace Cafe
                 if (MessageBox.Show("آیا از حذف محصول مطمعن هستید؟", "توجه", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                 {
                     this.dgvProducts.Rows.Remove(this.dgvProducts.CurrentRow);
-                    this.SetDatas();
+                    this.SetInfo();
                 }
             }
             else
@@ -146,23 +242,6 @@ namespace Cafe
 
         }
 
-        private void SetDatas()
-        {
-            int totalPrice = int.Parse(this.dgvProducts.CurrentRow.Cells["ProductPrice"].Value.ToString()) * int.Parse(this.dgvProducts.CurrentRow.Cells["Count"].Value.ToString());
-            this.dgvProducts.CurrentRow.Cells[4].Value = totalPrice;
-            this.SetInfo();
-        }
-
-        private void SetInfo()
-        {
-            this.lblTotalProducts.Text = this.dgvProducts.Rows.Count.ToString();
-            int totalPrice = 0;
-            foreach (DataGridViewRow item in this.dgvProducts.Rows)
-            {
-                totalPrice += int.Parse(item.Cells["TotalPrice"].Value.ToString());
-            }
-            this.lblTotalPrice.Text = totalPrice.ToString();
-        }
 
         private void btnSubmitOrder_Click(object sender, EventArgs e)
         {
@@ -196,85 +275,6 @@ namespace Cafe
                 MessageBox.Show("با موفقیت ثبت شد", "توجه", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Reset();
             }
-        }
-
-        private bool ValidateInputs()
-        {
-
-            if (this.txtCustomer.Text == "")
-            {
-                MessageBox.Show("طرف حساب انتخاب نشده است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            if (this.IsWrongProductCount())
-            {
-                MessageBox.Show("محصولی انتخاب نشده است", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-
-            return true;
-        }
-
-        private bool IsWrongProductCount()
-        {
-            try
-            {
-                int test = int.Parse(this.lblTotalProducts.Text);
-                if (test <= 0)
-                    return true;
-                return false;
-            }
-            catch
-            {
-                return true;
-            }
-        }
-
-        private void Reset()
-        {
-            this.dgvProducts.Rows.Clear();
-            this.SetInfo();
-            if (dgvCustomers.Rows.Count > 0)
-            {
-                dgvCustomers.ClearSelection();
-                dgvCustomers.Rows[0].Selected = true;
-                dgvCustomers.CurrentCell = dgvCustomers.Rows[0].Cells[1];
-                if (dgvCustomers.CurrentRow.Cells[2].Value != null)
-                {
-                    this.txtAddress.Text = dgvCustomers.CurrentRow.Cells[2].Value.ToString();
-                }
-                else
-                {
-                    this.txtAddress.Text = "";
-                }
-            }
-        }
-
-        private string GetOrderCode(int CustomerId)
-        {
-            DateTime my = new DateTime(DateTime.Now.Ticks);
-            int year = my.Year;
-            int month = my.Month;
-            int day = my.Day;
-            int hour = my.Hour;
-            int minute = my.Minute;
-            int second = my.Second;
-            int milisecond = my.Millisecond;
-            int sum = year + month + day + hour + minute + second + milisecond;
-            int productCode = int.Parse(lblTotalProducts.Text) + this.GetProductCode();
-            string orderCode = $"{CustomerId}{productCode}{sum}";
-            return orderCode;
-        }
-
-        private int GetProductCode()
-        {
-            int codes = 0;
-            foreach (DataGridViewRow item in dgvProducts.Rows)
-            {
-                codes += int.Parse(item.Cells[0].Value.ToString());
-            }
-            return codes;
         }
 
     }

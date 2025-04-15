@@ -20,49 +20,6 @@ namespace Cafe.Tools
             InitializeComponent();
         }
 
-        private void AddProduct_Load(object sender, EventArgs e)
-        {
-            this.dgvProducts.AutoGenerateColumns = false;
-            this.BindGrid();
-        }
-
-        private void BindGrid(string filter = "")
-        {
-            using (UnitOfWork db = new UnitOfWork())
-            {
-                if (filter == "")
-                {
-                    this.dgvProducts.DataSource = db.ProductRepository.Get(p => p.Is_Active == true);
-                }
-                else
-                {
-                    this.dgvProducts.DataSource = db.ProductRepository.Get(p => p.Is_Active == true && p.ProductName.Contains(filter) || p.ProductPrice.ToString().Contains(filter));
-                }
-            }
-        }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
-        {
-            this.BindGrid(txtSearch.Text);
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            if (this.ValidateInputes())
-            {
-                this.Product = new ProductsListViewModel()
-                {
-                    ProductID = int.Parse(this.dgvProducts.CurrentRow.Cells[0].Value.ToString()),
-                    Count = int.Parse(this.txtCount.Text),
-                    ProductName = this.dgvProducts.CurrentRow.Cells[1].Value.ToString(),
-                    ProductPrice = int.Parse(this.dgvProducts.CurrentRow.Cells[2].Value.ToString()),
-                    TotalPrice = int.Parse(this.dgvProducts.CurrentRow.Cells[2].Value.ToString()) * int.Parse(this.txtCount.Text),
-                };
-                this.DialogResult = DialogResult.OK;
-            }
-
-        }
-
         private bool ValidateInputes()
         {
             if (this.dgvProducts.CurrentRow == null)
@@ -95,6 +52,50 @@ namespace Cafe.Tools
             {
                 return true;
             }
+        }
+
+        private void BindGrid(string filter = "")
+        {
+            using (UnitOfWork db = new UnitOfWork())
+            {
+                if (filter == "")
+                {
+                    this.dgvProducts.DataSource = db.ProductRepository.Get(p => p.Is_Active == true);
+                }
+                else
+                {
+                    this.dgvProducts.DataSource = db.ProductRepository.Get(p => p.Is_Active == true && p.ProductName.Contains(filter) || p.ProductPrice.ToString().Contains(filter));
+                }
+            }
+        }
+
+
+        private void AddProduct_Load(object sender, EventArgs e)
+        {
+            this.dgvProducts.AutoGenerateColumns = false;
+            this.BindGrid();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            this.BindGrid(txtSearch.Text);
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (this.ValidateInputes())
+            {
+                this.Product = new ProductsListViewModel()
+                {
+                    ProductID = int.Parse(this.dgvProducts.CurrentRow.Cells[0].Value.ToString()),
+                    Count = int.Parse(this.txtCount.Text),
+                    ProductName = this.dgvProducts.CurrentRow.Cells[1].Value.ToString(),
+                    ProductPrice = int.Parse(this.dgvProducts.CurrentRow.Cells[2].Value.ToString()),
+                    TotalPrice = int.Parse(this.dgvProducts.CurrentRow.Cells[2].Value.ToString()) * int.Parse(this.txtCount.Text),
+                };
+                this.DialogResult = DialogResult.OK;
+            }
+
         }
 
     }

@@ -19,12 +19,6 @@ namespace Cafe.Products
             InitializeComponent();
         }
 
-        private void Products_Load(object sender, EventArgs e)
-        {
-            this.dgvCustomers.AutoGenerateColumns = false;
-            BindGrid();
-        }
-
         public void BindGrid(string filter = "")
         {
             List<DataLayer.Customer> customers = new List<DataLayer.Customer>();
@@ -41,9 +35,10 @@ namespace Cafe.Products
             {
                 using (UnitOfWork db = new UnitOfWork())
                 {
-                    customers = (List<DataLayer.Customer>)db.CustomerRepository.Get(p => p.CustomerName.Contains(filter) || p.CustomerMobile.Contains(filter) || p.CustomerEmail.Contains(filter));
+                    customers = (List<DataLayer.Customer>)db.CustomerRepository.Get(c => c.CustomerName.Contains(filter) || c.CustomerMobile.Contains(filter) || c.CustomerEmail.Contains(filter));
                 }
             }
+
             DataLayer.Customer defaultCustomer = customers.SingleOrDefault(c => c.CustomerID == 1);
             if (defaultCustomer != null)
             {
@@ -56,6 +51,15 @@ namespace Cafe.Products
                 this.dgvCustomers.Rows.Add(customer.CustomerID, customer.CustomerName, customer.CustomerMobile, email);
             }
         }
+
+
+
+        private void Products_Load(object sender, EventArgs e)
+        {
+            this.dgvCustomers.AutoGenerateColumns = false;
+            this.BindGrid();
+        }
+
 
         private void btnRefreshCustomers_Click(object sender, EventArgs e)
         {
