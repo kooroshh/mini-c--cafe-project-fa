@@ -28,17 +28,29 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.تنظیماتToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.btnProducts = new System.Windows.Forms.ToolStripButton();
+            this.btnCustomer = new System.Windows.Forms.ToolStripButton();
+            this.btnOrders = new System.Windows.Forms.ToolStripButton();
+            this.btnSubmitOrder = new System.Windows.Forms.ToolStripButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtCustomer = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.dgvProducts = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label1 = new System.Windows.Forms.Label();
             this.txtAddress = new System.Windows.Forms.TextBox();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.btnAddProduct = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnDelete = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.txtSearchCustomer = new System.Windows.Forms.TextBox();
             this.dgvCustomers = new System.Windows.Forms.DataGridView();
@@ -50,17 +62,9 @@
             this.lblTotalPrice = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.btnDelete = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.btnProducts = new System.Windows.Forms.ToolStripButton();
-            this.btnCustomer = new System.Windows.Forms.ToolStripButton();
-            this.btnOrders = new System.Windows.Forms.ToolStripButton();
-            this.btnSubmitOrder = new System.Windows.Forms.ToolStripButton();
-            this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Count = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblTime = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tTime = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -69,6 +73,7 @@
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).BeginInit();
             this.groupBox3.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -78,7 +83,7 @@
             this.تنظیماتToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(682, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(682, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -96,11 +101,54 @@
             this.btnCustomer,
             this.btnOrders,
             this.btnSubmitOrder});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 28);
+            this.toolStrip1.Location = new System.Drawing.Point(0, 30);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(682, 67);
             this.toolStrip1.TabIndex = 1;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // btnProducts
+            // 
+            this.btnProducts.Image = global::Cafe.Properties.Resources._1371476070_self1;
+            this.btnProducts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnProducts.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnProducts.Name = "btnProducts";
+            this.btnProducts.Size = new System.Drawing.Size(77, 64);
+            this.btnProducts.Text = "محصولات";
+            this.btnProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnProducts.Click += new System.EventHandler(this.btnFood_Click);
+            // 
+            // btnCustomer
+            // 
+            this.btnCustomer.Image = global::Cafe.Properties.Resources.Users;
+            this.btnCustomer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnCustomer.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnCustomer.Name = "btnCustomer";
+            this.btnCustomer.Size = new System.Drawing.Size(66, 64);
+            this.btnCustomer.Text = "مشتریان";
+            this.btnCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
+            // 
+            // btnOrders
+            // 
+            this.btnOrders.Image = global::Cafe.Properties.Resources.list2;
+            this.btnOrders.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnOrders.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnOrders.Name = "btnOrders";
+            this.btnOrders.Size = new System.Drawing.Size(74, 64);
+            this.btnOrders.Text = "سفارشات";
+            this.btnOrders.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            // 
+            // btnSubmitOrder
+            // 
+            this.btnSubmitOrder.Image = global::Cafe.Properties.Resources._1371475930_filenew;
+            this.btnSubmitOrder.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
+            this.btnSubmitOrder.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnSubmitOrder.Name = "btnSubmitOrder";
+            this.btnSubmitOrder.Size = new System.Drawing.Size(89, 64);
+            this.btnSubmitOrder.Text = "ثبت سفارش";
+            this.btnSubmitOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.btnSubmitOrder.Click += new System.EventHandler(this.btnSubmitOrder_Click);
             // 
             // groupBox1
             // 
@@ -154,6 +202,47 @@
             this.dgvProducts.Size = new System.Drawing.Size(474, 121);
             this.dgvProducts.TabIndex = 2;
             // 
+            // dataGridViewTextBoxColumn1
+            // 
+            this.dataGridViewTextBoxColumn1.DataPropertyName = "ProductID";
+            this.dataGridViewTextBoxColumn1.HeaderText = "ProductID";
+            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
+            this.dataGridViewTextBoxColumn1.ReadOnly = true;
+            this.dataGridViewTextBoxColumn1.Visible = false;
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "ProductName";
+            this.dataGridViewTextBoxColumn2.HeaderText = "نام محصول";
+            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // ProductPrice
+            // 
+            this.ProductPrice.DataPropertyName = "ProductPrice";
+            this.ProductPrice.HeaderText = "قیمت محصول";
+            this.ProductPrice.MinimumWidth = 6;
+            this.ProductPrice.Name = "ProductPrice";
+            this.ProductPrice.ReadOnly = true;
+            // 
+            // Count
+            // 
+            this.Count.DataPropertyName = "Count";
+            this.Count.HeaderText = "تعداد";
+            this.Count.MinimumWidth = 6;
+            this.Count.Name = "Count";
+            this.Count.ReadOnly = true;
+            // 
+            // TotalPrice
+            // 
+            this.TotalPrice.DataPropertyName = "TotalPrice";
+            this.TotalPrice.HeaderText = "قیمت نهایی";
+            this.TotalPrice.MinimumWidth = 6;
+            this.TotalPrice.Name = "TotalPrice";
+            this.TotalPrice.ReadOnly = true;
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -190,6 +279,20 @@
             this.btnAddProduct.Size = new System.Drawing.Size(121, 24);
             this.btnAddProduct.Text = "افزودن محصول";
             this.btnAddProduct.Click += new System.EventHandler(this.btnAddProduct_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(110, 24);
+            this.btnDelete.Text = "حذف محصول";
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(162, 24);
+            this.btnEdit.Text = "ویرایش تعداد محصول";
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // groupBox2
             // 
@@ -302,109 +405,34 @@
             this.label3.TabIndex = 5;
             this.label3.Text = "قیمت نهایی :";
             // 
-            // btnDelete
+            // statusStrip1
             // 
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(110, 24);
-            this.btnDelete.Text = "حذف محصول";
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblTime});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 477);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(682, 26);
+            this.statusStrip1.TabIndex = 6;
+            this.statusStrip1.Text = "statusStrip1";
             // 
-            // btnEdit
+            // lblTime
             // 
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(162, 24);
-            this.btnEdit.Text = "ویرایش تعداد محصول";
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(171, 20);
+            this.lblTime.Text = " 0000/00/00  --  00:00:00";
             // 
-            // btnProducts
+            // tTime
             // 
-            this.btnProducts.Image = global::Cafe.Properties.Resources._1371476070_self1;
-            this.btnProducts.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnProducts.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnProducts.Name = "btnProducts";
-            this.btnProducts.Size = new System.Drawing.Size(77, 64);
-            this.btnProducts.Text = "محصولات";
-            this.btnProducts.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnProducts.Click += new System.EventHandler(this.btnFood_Click);
-            // 
-            // btnCustomer
-            // 
-            this.btnCustomer.Image = global::Cafe.Properties.Resources.Users;
-            this.btnCustomer.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnCustomer.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnCustomer.Name = "btnCustomer";
-            this.btnCustomer.Size = new System.Drawing.Size(66, 64);
-            this.btnCustomer.Text = "مشتریان";
-            this.btnCustomer.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnCustomer.Click += new System.EventHandler(this.btnCustomer_Click);
-            // 
-            // btnOrders
-            // 
-            this.btnOrders.Image = global::Cafe.Properties.Resources.list2;
-            this.btnOrders.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnOrders.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnOrders.Name = "btnOrders";
-            this.btnOrders.Size = new System.Drawing.Size(74, 64);
-            this.btnOrders.Text = "سفارشات";
-            this.btnOrders.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            // 
-            // btnSubmitOrder
-            // 
-            this.btnSubmitOrder.Image = global::Cafe.Properties.Resources._1371475930_filenew;
-            this.btnSubmitOrder.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-            this.btnSubmitOrder.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.btnSubmitOrder.Name = "btnSubmitOrder";
-            this.btnSubmitOrder.Size = new System.Drawing.Size(89, 64);
-            this.btnSubmitOrder.Text = "ثبت سفارش";
-            this.btnSubmitOrder.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
-            this.btnSubmitOrder.Click += new System.EventHandler(this.btnSubmitOrder_Click);
-            // 
-            // dataGridViewTextBoxColumn1
-            // 
-            this.dataGridViewTextBoxColumn1.DataPropertyName = "ProductID";
-            this.dataGridViewTextBoxColumn1.HeaderText = "ProductID";
-            this.dataGridViewTextBoxColumn1.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
-            this.dataGridViewTextBoxColumn1.ReadOnly = true;
-            this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "ProductName";
-            this.dataGridViewTextBoxColumn2.HeaderText = "نام محصول";
-            this.dataGridViewTextBoxColumn2.MinimumWidth = 6;
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // ProductPrice
-            // 
-            this.ProductPrice.DataPropertyName = "ProductPrice";
-            this.ProductPrice.HeaderText = "قیمت محصول";
-            this.ProductPrice.MinimumWidth = 6;
-            this.ProductPrice.Name = "ProductPrice";
-            this.ProductPrice.ReadOnly = true;
-            // 
-            // Count
-            // 
-            this.Count.DataPropertyName = "Count";
-            this.Count.HeaderText = "تعداد";
-            this.Count.MinimumWidth = 6;
-            this.Count.Name = "Count";
-            this.Count.ReadOnly = true;
-            // 
-            // TotalPrice
-            // 
-            this.TotalPrice.DataPropertyName = "TotalPrice";
-            this.TotalPrice.HeaderText = "قیمت نهایی";
-            this.TotalPrice.MinimumWidth = 6;
-            this.TotalPrice.Name = "TotalPrice";
-            this.TotalPrice.ReadOnly = true;
+            this.tTime.Interval = 1000;
+            this.tTime.Tick += new System.EventHandler(this.tTime_Tick);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(682, 503);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -432,6 +460,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvCustomers)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -472,5 +502,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductPrice;
         private System.Windows.Forms.DataGridViewTextBoxColumn Count;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalPrice;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblTime;
+        private System.Windows.Forms.Timer tTime;
     }
 }

@@ -11,6 +11,7 @@ using Cafe.DataLayer;
 using Cafe.DataLayer.Context;
 using Cafe.Products;
 using Cafe.Tools;
+using Cafe.Utilities.Converter;
 using Cafe.ViewModels.Customer;
 using Cafe.ViewModels.Product;
 
@@ -149,9 +150,20 @@ namespace Cafe
             }
         }
 
+        private void SetTime()
+        {
+            this.tTime.Enabled = true;
+        }
 
 
-
+        private void Main_Load(object sender, EventArgs e)
+        {
+            dgvCustomers.AutoGenerateColumns = false;
+            dgvProducts.AutoGenerateColumns = false;
+            this.LoadCustomers();
+            this.SetCustomersInputsValues();
+            this.SetTime();
+        }
         private void btnFood_Click(object sender, EventArgs e)
         {
             this.ShowDialog(new Products.Products());
@@ -161,14 +173,6 @@ namespace Cafe
         {
             this.ShowDialog(new Customers());
             this.LoadCustomers();
-        }
-
-        private void Main_Load(object sender, EventArgs e)
-        {
-            dgvCustomers.AutoGenerateColumns = false;
-            dgvProducts.AutoGenerateColumns = false;
-            this.LoadCustomers();
-            this.SetCustomersInputsValues();
         }
 
         private void dgvCustomers_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -277,5 +281,9 @@ namespace Cafe
             }
         }
 
+        private void tTime_Tick(object sender, EventArgs e)
+        {
+            this.lblTime.Text = DateTime.Now.ToShamsi();
+        }
     }
 }

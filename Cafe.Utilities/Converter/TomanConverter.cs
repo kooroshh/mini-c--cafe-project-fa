@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cafe.Utilities.Convertor
+namespace Cafe.Utilities.Converter
 {
-    public static class TomanConvertor
+    public static class TomanConverter
     {
         public static string ToToman(this int price)
         {
