@@ -9,7 +9,7 @@ namespace Cafe.DataLayer.Repositories
 {
     internal interface IGenericRepository<TEntity> where TEntity : class
     {
-        IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> where = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderby = null);
+        IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> where = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderby = null, params string[] includes);
         TEntity GetById(object key);
         void Delete(TEntity entity);
         void Delete(object key);

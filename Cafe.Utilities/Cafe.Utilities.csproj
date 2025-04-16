@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Converter\MiladiConvertor.cs" />
     <Compile Include="Converter\ShamsiConverter.cs" />
     <Compile Include="Converter\TomanConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

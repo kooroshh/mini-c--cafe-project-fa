@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cafe.DataLayer;
 using Cafe.DataLayer.Context;
+using Cafe.Orders;
 using Cafe.Products;
 using Cafe.Tools;
 using Cafe.Utilities.Converter;
@@ -105,6 +106,25 @@ namespace Cafe
             }
         }
 
+        private bool ValidateCount()
+        {
+
+            foreach(DataGridViewRow item in this.dgvProducts.Rows)
+            {
+                using (UnitOfWork db = new UnitOfWork())
+                {
+                    Product product = db.ProductRepository.GetById((int)item.Cells["ProductID"].Value);
+                    if (product.Is_Active == false)
+                    {
+                        MessageBox.Show($"محصول {product.ProductName} موجود نمیباشد", "خطا", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
+
         private bool ValidateInputs()
         {
 
@@ -142,6 +162,7 @@ namespace Cafe
                 if (filter == "")
                 {
                     this.dgvCustomers.DataSource = db.CustomerRepository.GetListOfCustomers();
+                    this.txtCustomer.Text = dgvCustomers.CurrentRow.Cells[1].Value.ToString();
                 }
                 else
                 {
@@ -245,7 +266,7 @@ namespace Cafe
 
         private void btnSubmitOrder_Click(object sender, EventArgs e)
         {
-            if (ValidateInputs())
+            if (ValidateInputs() && ValidateCount())
             {
                 using (UnitOfWork db = new UnitOfWork())
                 {
@@ -279,7 +300,12 @@ namespace Cafe
 
         private void tTime_Tick(object sender, EventArgs e)
         {
-            this.lblTime.Text = DateTime.Now.ToShamsi();
+            this.lblTime.Text = DateTime.Now.ToShamsiTick();
+        }
+
+        private void btnOrders_Click(object sender, EventArgs e)
+        {
+            this.ShowDialog(new frmOrders());
         }
     }
 }

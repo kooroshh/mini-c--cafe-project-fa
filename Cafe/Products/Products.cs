@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Cafe.DataLayer;
 using Cafe.DataLayer.Context;
 using Cafe.Utilities.Converter;
 
@@ -94,12 +95,19 @@ namespace Cafe.Products
                 using (UnitOfWork db = new UnitOfWork())
                 {
                     product = db.ProductRepository.GetById(this.dgvProducts.CurrentRow.Cells[0].Value);
-                    if (MessageBox.Show($"آیا از حذف {product.ProductName} مطمعن هستید؟", "اخطار", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                    if (db.OrdersProductsRepository.Get(op => op.ProductID == product.ProductID).Any())
                     {
+                        MessageBox.Show("امکان حذف این محصول نمی باشد زیا قبلا استفاده شده است.لطفا محصول را از حالت موجود بردارید", "توجه توجه", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
+
+                    }
+                    else if (MessageBox.Show($"آیا از حذف {product.ProductName} مطمعن هستید؟", "اخطار", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
+                    {
+                        
                         db.ProductRepository.Delete(product);
                         db.Save();
                         this.BindGrid();
                     }
+
                 }
 
             }

@@ -40,7 +40,7 @@ namespace Cafe.DataLayer.Services
             this.Delete(entity);
         }
 
-        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> where = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderby = null)
+        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> where = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderby = null, params string[] includes)
         {
             IQueryable<TEntity> query = this._dbSet;
 
@@ -52,6 +52,11 @@ namespace Cafe.DataLayer.Services
             if (orderby != null)
             {
                 query = orderby(query);
+            }
+
+            foreach(string include in includes)
+            {
+                query = query.Include(include);
             }
 
             return query.ToList();

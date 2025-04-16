@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Cafe.DataLayer;
 using Cafe.DataLayer.Context;
 using Cafe.Utilities.Converter;
 
@@ -103,6 +104,11 @@ namespace Cafe.Products
                     customer = db.CustomerRepository.GetById(this.dgvCustomers.CurrentRow.Cells[0].Value);
                     if (MessageBox.Show($"آیا از حذف {customer.CustomerName} مطمعن هستید؟", "اخطار", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK)
                     {
+                        IEnumerable<Order> customerOrders = db.OrderRepository.Get(o => o.CustomerID == customer.CustomerID);
+                        foreach(Order order in customerOrders)
+                        {
+                            order.CustomerID = 1;
+                        }
                         db.CustomerRepository.Delete(customer);
                         db.Save();
                         this.BindGrid();

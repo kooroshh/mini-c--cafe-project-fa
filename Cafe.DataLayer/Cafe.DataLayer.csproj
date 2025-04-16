@@ -81,8 +81,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\ICustomerRepository.cs" />
     <Compile Include="Repositories\IGenericRepository.cs" />
+    <Compile Include="Repositories\IOrdersRepository.cs" />
     <Compile Include="Services\CustomerRepository.cs" />
     <Compile Include="Services\GenericRepository.cs" />
+    <Compile Include="Services\OrderRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="CafeDB.edmx">
