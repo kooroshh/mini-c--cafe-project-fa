@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Cafe.DataLayer;
 using Cafe.DataLayer.Context;
+using Cafe.Login;
 using Cafe.Orders;
 using Cafe.Products;
 using Cafe.Tools;
@@ -72,6 +73,7 @@ namespace Cafe
                 {
                     this.txtAddress.Text = "";
                 }
+                this.txtCustomer.Text = dgvCustomers.CurrentRow.Cells[1].Value.ToString();
             }
         }
 
@@ -171,12 +173,22 @@ namespace Cafe
             }
         }
 
+        private void IsLogged()
+        {
+            frmLogin frm = new frmLogin();
+            if (frm.ShowDialog() != DialogResult.OK)
+            {
+                Application.Exit();
+            }
+        }
+
 
 
         private void Main_Load(object sender, EventArgs e)
         {
-            dgvCustomers.AutoGenerateColumns = false;
-            dgvProducts.AutoGenerateColumns = false;
+            this.IsLogged();
+            this.dgvCustomers.AutoGenerateColumns = false;
+            this.dgvProducts.AutoGenerateColumns = false;
             this.LoadCustomers();
             this.SetCustomersInputsValues();
             this.tTime.Enabled = true;
@@ -306,6 +318,15 @@ namespace Cafe
         private void btnOrders_Click(object sender, EventArgs e)
         {
             this.ShowDialog(new frmOrders());
+        }
+
+        private void btnChangePass_Click(object sender, EventArgs e)
+        {
+            frmChangePassword frm = new frmChangePassword();
+            if(frm.ShowDialog() == DialogResult.OK)
+            {
+                Application.Restart();
+            }
         }
     }
 }

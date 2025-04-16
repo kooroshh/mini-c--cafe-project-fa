@@ -12,6 +12,7 @@
         <AssociationConnector Association="Cafe_DBModel.FK_Orders_CustomerID" />
         <AssociationConnector Association="Cafe_DBModel.FK_OP_OrderID" />
         <AssociationConnector Association="Cafe_DBModel.FK_OP_ProductID" />
+        <EntityTypeShape EntityType="Cafe_DBModel.User" Width="1.5" PointX="0.75" PointY="4.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

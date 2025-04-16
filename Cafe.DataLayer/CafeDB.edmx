@@ -44,6 +44,13 @@
           <Property Name="ProductPrice" Type="int" Nullable="false" />
           <Property Name="Is_Active" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
         <Association Name="FK_OP_OrderID">
           <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
           <End Role="Orders_Products" Type="Self.Orders_Products" Multiplicity="*" />
@@ -85,6 +92,7 @@
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders_Products" EntityType="Self.Orders_Products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_OP_OrderID" Association="Self.FK_OP_OrderID">
             <End Role="Orders" EntitySet="Orders" />
             <End Role="Orders_Products" EntitySet="Orders_Products" />
@@ -119,6 +127,7 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="Orders_Products" EntitySet="Orders_Products" />
           </AssociationSet>
+          <EntitySet Name="Users" EntityType="Cafe_DBModel.User" />
         </EntityContainer>
         <EntityType Name="Product">
           <Key>
@@ -201,6 +210,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="username" />
+          </Key>
+          <Property Name="username" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -246,6 +262,14 @@
                 <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="ProductID" ColumnName="ProductID" />
                 <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Cafe_DBModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
