@@ -150,10 +150,6 @@ namespace Cafe
             }
         }
 
-        private void SetTime()
-        {
-            this.tTime.Enabled = true;
-        }
 
 
         private void Main_Load(object sender, EventArgs e)
@@ -162,7 +158,7 @@ namespace Cafe
             dgvProducts.AutoGenerateColumns = false;
             this.LoadCustomers();
             this.SetCustomersInputsValues();
-            this.SetTime();
+            this.tTime.Enabled = true;
         }
         private void btnFood_Click(object sender, EventArgs e)
         {
