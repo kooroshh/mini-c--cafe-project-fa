@@ -36,13 +36,26 @@ namespace Cafe
             return codes;
         }
 
-        private string GetOrderCode(int CustomerId)
+        private string MakeOrderCode(int CustomerId)
         {
             DateTime my = DateTime.Now;
             int sum = my.Year + my.Month + my.Day + my.Hour + my.Minute + my.Second + my.Millisecond;
             int productCode = int.Parse(lblTotalProducts.Text) + this.GetProductCode();
             string orderCode = $"{CustomerId}{productCode}{sum}";
             return orderCode;
+        }
+
+        private string GetOrderCode(int CustomerId)
+        {
+            using (UnitOfWork db = new UnitOfWork())
+            {
+                string orderCode = this.MakeOrderCode(CustomerId);
+                while (db.OrderRepository.Get(o => o.OrderCode == orderCode).Any())
+                {
+                    orderCode = this.MakeOrderCode(CustomerId);
+                }
+                return orderCode;
+            }
         }
 
         private void SetInfo()
